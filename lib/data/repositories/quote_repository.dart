@@ -41,7 +41,7 @@ class QuoteRepository implements IQuoteRepository {
   Future<Result<List<QuoteModel>, Failure>> getRandomQuote() async {
     try {
       final quote = await _apiService.getRandomQuote();
-      return Result.success(quote);
+      return Success(quote);
     } on DioException catch (e) {
       return Error(ServerFailure('Failed to fetch random quote: ${e.message}'));
     } catch (e) {
@@ -52,12 +52,12 @@ class QuoteRepository implements IQuoteRepository {
   @override
   Future<Result<List<TagModel>, Failure>> getTags() async {
     if (_cachedTags != null) {
-      return Result.success(_cachedTags!);
+      return Success(_cachedTags!);
     }
     try {
       final tags = await _apiService.getTags();
       _cachedTags = tags;
-      return Result.success(tags);
+      return Success(tags);
     } on DioException catch (e) {
       return Error(ServerFailure('Failed to fetch tags: ${e.message}'));
     } catch (e) {

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:picked/core/extension/build_context_extension.dart';
+import 'package:picked/core/extension/quote_extension.dart';
 import 'package:picked/data/models/quote_model.dart';
 import 'package:picked/features/favorites/cubit/favorites_cubit.dart';
 import 'package:share_plus/share_plus.dart';
@@ -146,11 +147,7 @@ class QuoteDetailScreen extends StatelessWidget {
                     child: Text(
                       quote.content,
                       textAlign: TextAlign.center,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      style: quote.getTextStyle(context),
                     ),
                   ),
                 ),
