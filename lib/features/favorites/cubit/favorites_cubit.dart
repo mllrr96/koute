@@ -23,7 +23,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   Future<void> toggleFavorite(QuoteModel quote) async {
     final isCurrentlyFavoriteResult = await _repository.isFavorite(quote.id);
-     isCurrentlyFavoriteResult.when(
+    isCurrentlyFavoriteResult.when(
       (isFavorite) async {
         if (isFavorite) {
           await _repository.removeFavoriteQuote(quote.id);

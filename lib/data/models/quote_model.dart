@@ -21,5 +21,4 @@ sealed class QuoteModel with _$QuoteModel {
 
   factory QuoteModel.fromJson(Map<String, dynamic> json) =>
       _$QuoteModelFromJson(json);
-
 }

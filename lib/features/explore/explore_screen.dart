@@ -16,6 +16,7 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return BlocProvider(
       create: (context) => getIt<ExploreBloc>()..add(LoadTags()),
       child: Scaffold(
@@ -23,7 +24,7 @@ class ExploreScreen extends StatelessWidget {
           systemOverlayStyle: context.systemUiOverlayStyle,
           surfaceTintColor: Colors.transparent,
           leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: theme.scaffoldBackgroundColor,
           elevation: 0,
           title: const Text(
             'Explore',
@@ -50,7 +51,8 @@ class ExploreScreen extends StatelessWidget {
                           itemCount: 5,
                           itemBuilder: (_, __) => const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 4.0),
-                            child: Chip(label: Text('Loading')),
+                            child:
+                                Chip(label: Skeleton.shade(child: Text('...'))),
                           ),
                         ),
                       ),
@@ -115,8 +117,8 @@ class ExploreScreen extends StatelessWidget {
                             child: QuoteCard(
                               quote: item,
                               onTap: () {
-                                AutoRouter.of(context)
-                                    .push(QuoteDetailRoute(quote: item, index: index));
+                                AutoRouter.of(context).push(QuoteDetailRoute(
+                                    quote: item, index: index));
                               },
                             ),
                           ),

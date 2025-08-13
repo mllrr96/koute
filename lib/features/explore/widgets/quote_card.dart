@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:picked/core/extension/build_context_extension.dart';
 import 'package:picked/core/extension/quote_extension.dart';
 import 'package:picked/data/models/quote_model.dart';
 
@@ -15,10 +16,11 @@ class QuoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        color: Theme.of(context).colorScheme.surface,
+        color: theme.colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -31,10 +33,7 @@ class QuoteCard extends StatelessWidget {
               Icon(
                 LucideIcons.quote,
                 size: 35,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withValues(alpha: 0.2),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
               ),
               const SizedBox(height: 16),
               () {
@@ -44,7 +43,8 @@ class QuoteCard extends StatelessWidget {
                     child: Text(
                       quote.content,
                       style: quote.getTextStyle(context),
-                      textAlign: TextAlign.center,),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 );
               }(),
@@ -53,13 +53,10 @@ class QuoteCard extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   quote.author,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.4),
-                      ),
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                  ),
                   textAlign: TextAlign.right,
                 ),
               ),

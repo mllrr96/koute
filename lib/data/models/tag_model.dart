@@ -14,5 +14,6 @@ sealed class TagModel with _$TagModel {
     required int quoteCount,
   }) = _TagModel;
 
-  factory TagModel.fromJson(Map<String, dynamic> json) => _$TagModelFromJson(json);
+  factory TagModel.fromJson(Map<String, dynamic> json) =>
+      _$TagModelFromJson(json);
 }

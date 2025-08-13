@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picked/app_router.dart';
+import 'package:picked/core/extension/build_context_extension.dart';
 import 'package:picked/features/explore/widgets/quote_card.dart';
 import 'package:picked/features/favorites/cubit/favorites_cubit.dart';
 import 'package:picked/injection.dart';
@@ -12,13 +13,14 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return BlocProvider(
       create: (context) => getIt<FavoritesCubit>()..loadFavorites(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
             'Favorites',
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: theme.textTheme.headlineSmall,
           ),
         ),
         body: BlocBuilder<FavoritesCubit, FavoritesState>(

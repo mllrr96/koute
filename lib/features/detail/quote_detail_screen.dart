@@ -58,7 +58,7 @@ class QuoteDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             icon: const Icon(LucideIcons.cornerDownLeft,
                 color: Colors.black, size: 30),
-            onPressed: () => AutoRouter.of(context).pop(),
+            onPressed: context.maybePop,
           ),
         ],
       ),
@@ -66,10 +66,11 @@ class QuoteDetailScreen extends StatelessWidget {
   }
 
   Widget _buildQuoteCard(BuildContext context, QuoteModel displayQuote) {
+    final theme = context.theme;
     return Container(
       padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(24.0),
       ),
       child: Stack(
@@ -109,7 +110,7 @@ class QuoteDetailScreen extends StatelessWidget {
                     Material(
                       child: Chip(
                         labelStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: theme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                         label: Text(displayQuote.tags.first),
@@ -166,11 +167,12 @@ class QuoteDetailScreen extends StatelessWidget {
   }
 
   Widget _buildBottomActionBar(BuildContext context) {
+    final theme = context.theme;
     return Container(
       width: double.maxFinite,
       height: kToolbarHeight * 1.5,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
@@ -181,17 +183,17 @@ class QuoteDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             icon: const Icon(LucideIcons.share, color: Colors.white),
             onPressed: () {
-              final currentQuote = quote;
-              Share.share('"${currentQuote.content}" - ${currentQuote.author}');
+              SharePlus.instance.share(ShareParams(
+                text: '"${quote.content}" - ${quote.author}',
+                subject: 'Quote from ${quote.author}',
+              ));
             },
           ),
           const SizedBox(width: 24),
           IconButton(
             padding: const EdgeInsets.all(16.0),
             icon: const Icon(Icons.casino, color: Colors.white),
-            onPressed: () {
-              // context.read<RandomQuoteCubit>().fetchRandomQuote();
-            },
+            onPressed: () {},
           ),
         ],
       ),

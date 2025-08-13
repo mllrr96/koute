@@ -12,6 +12,7 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: context.systemUiOverlayStyle,
       child: Scaffold(
@@ -24,26 +25,21 @@ class LandingScreen extends StatelessWidget {
               Icon(
                 LucideIcons.quote,
                 size: 120,
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary
-                    .withValues(alpha: 0.8),
+                color: theme.colorScheme.primary.withValues(alpha: 0.8),
               ),
               const SizedBox(height: 32.0),
               Text(
                 'Kuote',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayLarge
+                style: theme.textTheme.displayLarge
                     ?.copyWith(fontFamily: GoogleFonts.almendra().fontFamily),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16.0),
               Text(
                 'Discover daily inspiration and explore a world of wisdom.\nYour journey to profound thoughts starts here.',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontFamily: GoogleFonts.almendra().fontFamily,
-                    ),
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontFamily: GoogleFonts.almendra().fontFamily,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50.0),
@@ -60,9 +56,9 @@ class LandingScreen extends StatelessWidget {
                 ),
                 child: Text(
                   'Inspire me',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: theme.colorScheme.onPrimary,
+                  ),
                 ),
               ),
             ],

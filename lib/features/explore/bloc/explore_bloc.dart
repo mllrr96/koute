@@ -12,8 +12,10 @@ part 'explore_state.dart';
 @injectable
 class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
   final IQuoteRepository _repository;
-  late final PagingController<int, QuoteModel> pagingController = PagingController(
-    getNextPageKey: (state) => state.lastPageIsEmpty ? null : state.nextIntPageKey,
+  late final PagingController<int, QuoteModel> pagingController =
+      PagingController(
+    getNextPageKey: (state) =>
+        state.lastPageIsEmpty ? null : state.nextIntPageKey,
     fetchPage: _fetchPage,
   );
 
@@ -67,4 +69,3 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
     return super.close();
   }
 }
-
