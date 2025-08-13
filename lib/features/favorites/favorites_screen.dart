@@ -33,21 +33,23 @@ class FavoritesScreen extends StatelessWidget {
                   itemCount: quotes.length,
                   itemBuilder: (context, index) {
                     final quote = quotes[index];
-                    return QuoteCard(
-                      quote: quote,
-                      onTap: () {
-                        AutoRouter.of(context).push(
-                          QuoteDetailRoute(quote: quote, index: index),
-                        );
-                      },
+                    return Hero(
+                      tag: quote.id + (index + 123).toString(),
+                      child: QuoteCard(
+                        quote: quote,
+                        onTap: () =>
+                          context.pushRoute(
+                            QuoteDetailRoute(quote: quote, index: index + 123),
+                          )
+                        ,
+                      ),
                     );
                   },
                 ),
               FavoritesEmpty() => const Center(
                   child: Text('No favorite quotes yet.'),
                 ),
-              FavoritesError(:final message) =>
-                Center(child: Text('Error: $message')),
+              FavoritesError(:final message) => Center(child: Text('Error: $message')),
               _ => const Center(child: CircularProgressIndicator()),
             };
           },

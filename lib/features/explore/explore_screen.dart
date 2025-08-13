@@ -35,7 +35,7 @@ class ExploreScreen extends StatelessWidget {
               child: IconButton(
                 padding: const EdgeInsets.all(14.0),
                 icon: const Icon(LucideIcons.heart, size: 30),
-                onPressed: () => AutoRouter.of(context).push(const FavoritesRoute()),
+                onPressed: () => context.pushRoute(const FavoritesRoute()),
               ),
             ),
           ],
@@ -114,8 +114,8 @@ class ExploreScreen extends StatelessWidget {
                             child: QuoteCard(
                               quote: item,
                               onTap: () {
-                                AutoRouter.of(context)
-                                    .push(QuoteDetailRoute(quote: item, index: index));
+                                context
+                                    .pushRoute(QuoteDetailRoute(quote: item, index: index));
                               },
                             ),
                           ),

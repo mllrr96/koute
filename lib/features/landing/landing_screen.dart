@@ -44,9 +44,7 @@ class LandingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50.0),
               ElevatedButton(
-                onPressed: () {
-                  AutoRouter.of(context).replace(const ExploreRoute());
-                },
+                onPressed: () => context.replaceRoute(const ExploreRoute()),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 48.0),
                   padding: const EdgeInsets.symmetric(vertical: 24.0),
