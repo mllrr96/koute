@@ -10,19 +10,24 @@ A simple, polished "Quote of the Day / Explore quotes" Flutter application.
 - **Favorites Screen**: Offline storage and display of your favorite quotes.
 - **Theming**: Supports light and dark themes.
 
+## Upcoming
+
+- [ ] App icon
+- [ ] More animation
+- [ ] Settings page
 
 ## Screenshots
 <div style="text-align: center">
     <table>
         <tr>
             <td style="text-align: center">
-                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/landing.png" width="220"/>
+                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/landing.png" width="220" alt="landing screen"/>
             </td>            
             <td style="text-align: center">
-                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/explore.png" width="220"/>
+                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/explore.png" width="220" alt="explore screen"/>
             </td>   
             <td style="text-align: center">
-                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/quote.png" width="220"/>
+                <img src="https://github.com/mllrr96/koute/blob/main/assets/screenshots/quote.png" width="220" alt="quote details screen"/>
             </td>      
         </tr>
     </table>
