@@ -33,6 +33,10 @@ A simple, polished "Quote of the Day / Explore quotes" Flutter application.
     </table>
 </div>
 
+## Download
+
+- **Download for Android from the [Releases](https://github.com/mllrr96/koute/releases) page.
+
 ## Tech Stack
 
 - **Flutter**: UI Toolkit.
