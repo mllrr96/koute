@@ -6,7 +6,6 @@ import 'package:picked/core/extension/build_context_extension.dart';
 import 'package:picked/data/models/quote_model.dart';
 import 'package:picked/features/explore/bloc/explore_bloc.dart';
 import 'package:picked/features/explore/widgets/quote_card.dart';
-import 'package:picked/injection.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -18,47 +17,39 @@ class ExploreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     return BlocProvider(
-      create: (context) => getIt<ExploreBloc>()..add(LoadTags()),
+      create: (context) => ExploreBloc.init..add(LoadTags()),
       child: Scaffold(
         appBar: AppBar(
           systemOverlayStyle: context.systemUiOverlayStyle,
           surfaceTintColor: Colors.transparent,
-          leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
           backgroundColor: theme.scaffoldBackgroundColor,
           elevation: 0,
           title: const Text(
             'Explore',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
           ),
-          actions: [
-            IconButton(icon: const Icon(Icons.filter_list), onPressed: () {}),
-          ],
         ),
         body: Column(
           children: [
             SizedBox(
               height: 60,
               child: BlocBuilder<ExploreBloc, ExploreState>(
-                buildWhen: (previous, current) =>
-                    current is TagsLoaded || current is TagsLoading,
+                buildWhen: (previous, current) => current is TagsLoaded || current is TagsLoading,
                 builder: (context, state) {
                   return switch (state) {
                     TagsLoading() => Skeletonizer(
                         child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           scrollDirection: Axis.horizontal,
                           itemCount: 5,
                           itemBuilder: (_, __) => const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 4.0),
-                            child:
-                                Chip(label: Skeleton.shade(child: Text('...'))),
+                            child: Chip(label: Skeleton.shade(child: Text('...'))),
                           ),
                         ),
                       ),
                     TagsLoaded() => ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         scrollDirection: Axis.horizontal,
                         itemCount: state.tags.length,
                         itemBuilder: (context, index) {
@@ -66,17 +57,14 @@ class ExploreScreen extends StatelessWidget {
                           final isSelected = tag.name == state.selectedTag ||
                               (tag.name == 'All' && state.selectedTag == null);
                           return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
                             child: ChoiceChip(
                               label: Text(tag.name),
                               selected: isSelected,
                               selectedColor: Colors.grey[300],
                               onSelected: (selected) {
                                 if (selected) {
-                                  context
-                                      .read<ExploreBloc>()
-                                      .add(SelectTag(tag.name));
+                                  context.read<ExploreBloc>().add(SelectTag(tag.name));
                                 }
                               },
                             ),
@@ -98,10 +86,8 @@ class ExploreScreen extends StatelessWidget {
                     ),
                     child: PagingListener(
                       controller: bloc.pagingController,
-                      builder: (context, state, fetchNextPage) =>
-                          PagedMasonryGridView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                      builder: (context, state, fetchNextPage) => PagedMasonryGridView(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         gridDelegateBuilder: (index) {
                           return const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -117,8 +103,8 @@ class ExploreScreen extends StatelessWidget {
                             child: QuoteCard(
                               quote: item,
                               onTap: () {
-                                AutoRouter.of(context).push(QuoteDetailRoute(
-                                    quote: item, index: index));
+                                AutoRouter.of(context)
+                                    .push(QuoteDetailRoute(quote: item, index: index));
                               },
                             ),
                           ),

@@ -34,29 +34,14 @@ tasks:
     summary: |
       Run codegen
     cmds:
-      - |
-        flutter build apk --split-per-abi &&
-        cd build/app/outputs/flutter-apk &&
-        timestamp=$(date +"%Y-%m-%d_%H-%M-%S") &&
-        destination="/Users/mo/Desktop/EMS-$timestamp-v8a.apk" &&
-        cp app-arm64-v8a-release.apk "$destination"
+      - flutter build apk --split-per-abi
 
   gen:ipa:
     desc: Generate ipa release
     summary: |
       Run codegen
     cmds:
-      - |
-        flutter build ios --release --no-codesign &&
-        cd build/ios/iphoneos &&
-        mkdir Payload &&
-        cd Payload &&
-        ln -s ../Runner.app &&
-        cd .. &&
-        zip -r EMS.ipa Payload &&
-        timestamp=$(date +"%Y-%m-%d_%H-%M-%S") &&
-        mv EMS.ipa "/Users/mo/Desktop/EMS-$timestamp.ipa" &&
-        rm -rf Payload
+      - flutter build ios --release --no-codesign
 
   gen:tr:
     desc: Generate translations
@@ -71,14 +56,6 @@ tasks:
       Run codegen
     cmds:
       - dart format .
-
-  deploy:supabase:
-    desc: Generate translations
-    summary: |
-      Run codegen
-    cmds:
-      - supabase functions deploy
-
 
   gen:clean:
     desc: Generate dart files

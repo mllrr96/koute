@@ -5,12 +5,14 @@ import 'package:injectable/injectable.dart';
 import 'package:picked/data/models/quote_model.dart';
 import 'package:picked/data/models/tag_model.dart';
 import 'package:picked/data/repositories/i_quote_repository.dart';
+import 'package:picked/injection.dart';
 
 part 'explore_event.dart';
 part 'explore_state.dart';
 
 @injectable
 class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
+  static ExploreBloc get init => getIt<ExploreBloc>();
   final IQuoteRepository _repository;
   late final PagingController<int, QuoteModel> pagingController =
       PagingController(

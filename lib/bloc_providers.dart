@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picked/features/detail/cubit/random_quote_cubit.dart';
 import 'package:picked/features/favorites/cubit/favorites_cubit.dart';
-import 'package:picked/injection.dart';
 
 class BlocProviders extends StatelessWidget {
   const BlocProviders({super.key, required this.child});
@@ -14,10 +13,10 @@ class BlocProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<RandomQuoteCubit>(),
+          create: (context) => RandomQuoteCubit.init,
         ),
         BlocProvider(
-          create: (context) => getIt<FavoritesCubit>()..loadFavorites(),
+          create: (context) => FavoritesCubit.init..loadFavorites(),
         ),
       ],
       child: child,

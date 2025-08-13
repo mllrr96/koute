@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:picked/data/models/quote_model.dart';
 import 'package:picked/data/repositories/i_quote_repository.dart';
+import 'package:picked/injection.dart';
 
 part 'favorites_state.dart';
 
@@ -16,7 +17,13 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     emit(FavoritesLoading());
     final result = await _repository.getFavoriteQuotes();
     result.when(
-      (quotes) => emit(FavoritesLoaded(quotes)),
+      (quotes) {
+        if (quotes.isEmpty) {
+          emit(FavoritesEmpty());
+        } else {
+          emit(FavoritesLoaded(quotes));
+        }
+      },
       (failure) => emit(FavoritesError(failure.message)),
     );
   }
@@ -44,4 +51,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       (failure) => false, // Assume not favorite on error
     );
   }
+
+  static FavoritesCubit get init => getIt<FavoritesCubit>();
 }

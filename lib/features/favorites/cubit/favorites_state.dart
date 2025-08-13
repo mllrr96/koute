@@ -11,6 +11,8 @@ class FavoritesInitial extends FavoritesState {}
 
 class FavoritesLoading extends FavoritesState {}
 
+class FavoritesEmpty extends FavoritesState {}
+
 class FavoritesLoaded extends FavoritesState {
   final List<QuoteModel> quotes;
 
