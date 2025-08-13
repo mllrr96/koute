@@ -12,9 +12,9 @@ A simple, polished "Quote of the Day / Explore quotes" Flutter application.
 
 ## Upcoming
 
-- [ ] App icon
 - [ ] More animation
 - [ ] Settings page
+- [ ] Quote of the day feature
 
 ## Screenshots
 <div style="text-align: center">
