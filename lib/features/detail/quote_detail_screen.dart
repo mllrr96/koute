@@ -14,8 +14,7 @@ class QuoteDetailScreen extends StatelessWidget {
   final QuoteModel quote;
   final int index;
 
-  const QuoteDetailScreen(
-      {super.key, required this.quote, required this.index});
+  const QuoteDetailScreen({super.key, required this.quote, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,10 @@ class QuoteDetailScreen extends StatelessWidget {
               children: [
                 _buildCustomAppBar(context),
                 Expanded(
-                  child: Center(
-                    child: Hero(
-                        tag: quote.id + index.toString(),
-                        child: Material(
-                            color: Colors.transparent,
-                            child: _buildQuoteCard(context, quote))),
-                  ),
+                  child: Hero(
+                      tag: quote.id + index.toString(),
+                      child: Material(
+                          color: Colors.transparent, child: _buildQuoteCard(context, quote))),
                 ),
                 const SizedBox(height: 16),
                 _buildBottomActionBar(context),
@@ -56,8 +52,7 @@ class QuoteDetailScreen extends StatelessWidget {
         children: [
           IconButton(
             padding: const EdgeInsets.all(24.0),
-            icon: const Icon(LucideIcons.cornerDownLeft,
-                color: Colors.black, size: 30),
+            icon: const Icon(LucideIcons.cornerDownLeft, size: 30),
             onPressed: context.maybePop,
           ),
         ],
@@ -121,8 +116,7 @@ class QuoteDetailScreen extends StatelessWidget {
                     builder: (context, state) {
                       bool isFavorite = false;
                       if (state is FavoritesLoaded) {
-                        isFavorite =
-                            state.quotes.any((q) => q.id == displayQuote.id);
+                        isFavorite = state.quotes.any((q) => q.id == displayQuote.id);
                       }
 
                       return IconButton(
@@ -132,9 +126,7 @@ class QuoteDetailScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          context
-                              .read<FavoritesCubit>()
-                              .toggleFavorite(displayQuote);
+                          context.read<FavoritesCubit>().toggleFavorite(displayQuote);
                         },
                       );
                     },
@@ -148,7 +140,9 @@ class QuoteDetailScreen extends StatelessWidget {
                     child: Text(
                       quote.content,
                       textAlign: TextAlign.center,
-                      style: quote.getTextStyle(context),
+                      style: quote.getTextStyle(context).copyWith(
+                            fontSize: 26,
+                          ),
                     ),
                   ),
                 ),
@@ -182,18 +176,12 @@ class QuoteDetailScreen extends StatelessWidget {
           IconButton(
             padding: const EdgeInsets.all(16.0),
             icon: const Icon(LucideIcons.share, color: Colors.white),
-            onPressed: () {
-              SharePlus.instance.share(ShareParams(
+            onPressed: () async {
+              await SharePlus.instance.share(ShareParams(
                 text: '"${quote.content}" - ${quote.author}',
                 subject: 'Quote from ${quote.author}',
               ));
             },
-          ),
-          const SizedBox(width: 24),
-          IconButton(
-            padding: const EdgeInsets.all(16.0),
-            icon: const Icon(Icons.casino, color: Colors.white),
-            onPressed: () {},
           ),
         ],
       ),

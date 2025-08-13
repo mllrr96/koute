@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:picked/app_router.dart';
 import 'package:picked/core/extension/build_context_extension.dart';
 import 'package:picked/data/models/quote_model.dart';
@@ -28,6 +29,16 @@ class ExploreScreen extends StatelessWidget {
             'Explore',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                padding: const EdgeInsets.all(14.0),
+                icon: const Icon(LucideIcons.heart, size: 30),
+                onPressed: () => AutoRouter.of(context).push(const FavoritesRoute()),
+              ),
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -44,7 +55,7 @@ class ExploreScreen extends StatelessWidget {
                           itemCount: 5,
                           itemBuilder: (_, __) => const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 4.0),
-                            child: Chip(label: Skeleton.shade(child: Text('...'))),
+                            child: Chip(label: Text('loading...')),
                           ),
                         ),
                       ),
