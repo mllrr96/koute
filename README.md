@@ -76,8 +76,8 @@ This app uses the [Quotable API](https://github.com/lukePeavey/quotable) for fet
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/mllrr96/koute
-    cd koute
+    git clone https://github.com/mllrr96/kuote
+    cd kuote
     ```
 
 2.  **Get dependencies:**
